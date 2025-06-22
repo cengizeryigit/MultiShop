@@ -73,6 +73,7 @@ namespace MultiShop.Discount.Services
             parameters.Add("@Rate", updateDiscountCouponDto.Rate);
             parameters.Add("@IsActive", updateDiscountCouponDto.IsActive);
             parameters.Add("@ValidDate", updateDiscountCouponDto.ValidDate);
+            parameters.Add("@CouponID", updateDiscountCouponDto.CouponID);
 
             using (var connection = _context.CreateConnection())
             {
