@@ -14,14 +14,14 @@ namespace MultiShop.Discount.Services
             _context = context;
         }
 
-        public async Task CreateCouponAsync(CreateCouponDto createCouponDto)
+        public async Task CreateDiscountCouponAsync(CreateDiscountCouponDto createDiscountCouponDto)
         {
             string query="Insert Into Coupons (Code, Rate, IsActive, ValidDate) Values (@Code, @Rate, @IsActive, @ValidDate)";
             var parameters = new DynamicParameters();
-            parameters.Add("@Code", createCouponDto.Code);
-            parameters.Add("@Rate", createCouponDto.Rate);
-            parameters.Add("@IsActive", createCouponDto.IsActive);
-            parameters.Add("@ValidDate", createCouponDto.ValidDate);
+            parameters.Add("@Code", createDiscountCouponDto.Code);
+            parameters.Add("@Rate", createDiscountCouponDto.Rate);
+            parameters.Add("@IsActive", createDiscountCouponDto.IsActive);
+            parameters.Add("@ValidDate", createDiscountCouponDto.ValidDate);
 
             using (var connection = _context.CreateConnection())
             {
@@ -29,7 +29,7 @@ namespace MultiShop.Discount.Services
             }
         }
 
-        public async Task DeleteCouponAsync(int id)
+        public async Task DeleteDiscountCouponAsync(int id)
         {
             string query = "DELETE FROM Coupons WHERE CouponID = @CouponID";
             var parameters = new DynamicParameters();
@@ -41,18 +41,18 @@ namespace MultiShop.Discount.Services
             }
         }
 
-        public async Task<List<ResultCouponDto>> GetAllCouponsAsync()
+        public async Task<List<ResultDiscountCouponDto>> GetAllDiscountCouponsAsync()
         {
             string query = "SELECT CouponID, Code, Rate, IsActive, ValidDate FROM Coupons";
             
             using (var connection = _context.CreateConnection())
             {
-                var values = await connection.QueryAsync<ResultCouponDto>(query);
+                var values = await connection.QueryAsync<ResultDiscountCouponDto>(query);
                 return values.ToList();
             }
         }
 
-        public async Task<GetByIDCouponDto> GetByIdCouponsAsync(int id)
+        public async Task<GetByIDDiscountCouponDto> GetByIdDiscountCouponAsync(int id)
         {
             string query = "SELECT CouponID, Code, Rate, IsActive, ValidDate FROM Coupons WHERE CouponID = @CouponID";
             var parameters = new DynamicParameters();
@@ -60,19 +60,19 @@ namespace MultiShop.Discount.Services
 
             using (var connection = _context.CreateConnection())
             {
-               var values = await connection.QueryFirstOrDefaultAsync<GetByIDCouponDto>(query, parameters);
+               var values = await connection.QueryFirstOrDefaultAsync<GetByIDDiscountCouponDto>(query, parameters);
                 return values;
             }
         }
 
-        public async Task UpdateCouponAsync(UpdateCouponDto updateCouponDto)
+        public async Task UpdateDiscountCouponAsync(UpdateDiscountCouponDto updateDiscountCouponDto)
         {
             string query = "UPDATE Coupons SET Code = @Code, Rate = @Rate, IsActive = @IsActive, ValidDate = @ValidDate WHERE CouponID = @CouponID";
             var parameters = new DynamicParameters();
-            parameters.Add("@Code", updateCouponDto.Code);
-            parameters.Add("@Rate", updateCouponDto.Rate);
-            parameters.Add("@IsActive", updateCouponDto.IsActive);
-            parameters.Add("@ValidDate", updateCouponDto.ValidDate);
+            parameters.Add("@Code", updateDiscountCouponDto.Code);
+            parameters.Add("@Rate", updateDiscountCouponDto.Rate);
+            parameters.Add("@IsActive", updateDiscountCouponDto.IsActive);
+            parameters.Add("@ValidDate", updateDiscountCouponDto.ValidDate);
 
             using (var connection = _context.CreateConnection())
             {
