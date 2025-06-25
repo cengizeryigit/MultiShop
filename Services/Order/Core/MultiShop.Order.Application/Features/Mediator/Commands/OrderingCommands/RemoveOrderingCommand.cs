@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MultiShop.Order.Application.Features.Mediator.Commands.OrderingCommands
 {
-    public class RemoveOrderingRequest:IRequest
+    public class RemoveOrderingCommand:IRequest
     {
         public int Id { get; set; }
-        public RemoveOrderingRequest(int id)
+        public RemoveOrderingCommand(int id)
         {
             Id = id;
         }

@@ -7,16 +7,12 @@ using System.Threading.Tasks;
 
 namespace MultiShop.Order.Application.Features.Mediator.Commands.OrderingCommands
 {
-    public class UpdateOrderingRequest:IRequest
+    public class UpdateOrderingCommand:IRequest
     {
-        public int Id { get; set; }
-        public UpdateOrderingRequest(int id)
-        {
-            Id = id;
-        }
-
-        
-
+        public int OrderingID { get; set; }
+        public string UserID { get; set; }
+        public decimal TotalPrice { get; set; }
+        public DateTime OrderDate { get; set; }
 
     }
 }
