@@ -19,16 +19,14 @@ namespace MultiShop.Order.Application.Features.Mediator.Handlers.OrderingHandler
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(CreateOrderingCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateOrderingCommand request, CancellationToken cancellationToken)
         {
             await _repository.CreateAsync(new Ordering
             {
-                UserID = request.UserID,
-                TotalPrice = request.TotalPrice,
                 OrderDate = request.OrderDate,
+                TotalPrice = request.TotalPrice,
+                UserID = request.UserID
             });
-
-            return Unit.Value;
         }
     }
 }

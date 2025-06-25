@@ -32,33 +32,32 @@ namespace MultiShop.Order.WebApi.Controllers
             return Ok(values);
         }
 
-        [HttpGet("{id")]
-        public async Task<IActionResult> GetOrderDetailByID(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrderDetailById(int id)
         {
-            var values = await _getOrderDetailByIdQueryHandler.Handle(new GetOrderDetailByIDQuery(id));
-            return Ok(values);
+            var value = await _getOrderDetailByIdQueryHandler.Handle(new GetOrderDetailByIDQuery(id));
+            return Ok(value);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateOrderDetail(CreateOrderDetailCommand command)
         {
             await _createOrderDetailCommandHandler.Handle(command);
-            return Ok("Sipariş Detayı Başarıyla Eklendi");
+            return Ok("Sipariş detayı başarıyla eklendi");
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveOrderDetail(int id)
+        {
+            await _removeOrderDetailCommandHandler.Handle(new RemoveOrderDetailCommand(id));
+            return Ok("Sipariş detayı başarıyla silindi");
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateOrderDetail(UpdateOrderDetailCommand command)
         {
             await _updateOrderDetailCommandHandler.Handle(command);
-            return Ok("Sipariş Detayı Başarıyla Güncellendi");
-        }
-
-
-        [HttpDelete]
-        public async Task<IActionResult> RemoveOrderDetail(int id)
-        {
-            await _removeOrderDetailCommandHandler.Handle(new RemoveOrderDetailCommand(id));
-            return Ok("Sipariş Detayı Başarıyla Silindi");
+            return Ok("Sipariş detayı başarıyla güncellendi");
         }
     }
 }
