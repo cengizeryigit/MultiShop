@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MultiShop.Cargo.EntityLayer.Concrete
 {
-    public class CargoOperations
+    public class CargoOperation
     {
-        public int CargoOperaitonID { get; set; }
+        
+        public int CargoOperationID { get; set; }
         public string Barcode { get; set; }
         public string Description { get; set; }
         public DateTime OperationDate { get; set; }
