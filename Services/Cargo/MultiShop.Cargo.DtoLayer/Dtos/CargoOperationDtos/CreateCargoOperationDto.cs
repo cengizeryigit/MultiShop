@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiShop.Cargo.DtoLayer.Dtos.CargoOperationsDtos
+namespace MultiShop.Cargo.DtoLayer.Dtos.CargoOperationDtos
 {
-    public class UpdateCargoOperationDto
+    public class CreateCargoOperationDto
     {
-        public int CargoOperationID { get; set; }
         public string Barcode { get; set; }
         public string Description { get; set; }
         public DateTime OperationDate { get; set; }
