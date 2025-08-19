@@ -76,5 +76,25 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        [Route("UpdateCategory/{id}")]
+        public async Task<IActionResult> UpdateCategory(string id)
+        {
+            ViewBag.v0 = "Kategori İşlemleri";
+            ViewBag.v1 = "Anasayfa";
+            ViewBag.v2 = "Kategoriler";
+            ViewBag.v3 = "Kategori Güncelle";
+
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"https://localhost:7070/api/Categories/{id}");
+            if(responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<UpdateCategoryDto>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
     }
 }
