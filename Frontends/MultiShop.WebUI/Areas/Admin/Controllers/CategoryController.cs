@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AllowAnonymous]
     public class CategoryController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -14,7 +15,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-        [AllowAnonymous]
+       
         public async Task<IActionResult> Index()
         {
             ViewBag.v0="Kategori İşlemleri";
@@ -32,6 +33,32 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
                 return View(values);
             }
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateCategory()
+        {
+            ViewBag.v0 = "Kategori İşlemleri";
+            ViewBag.v1 = "Anasayfa";
+            ViewBag.v2 = "Kategoriler";
+            ViewBag.v3 = "Kategori Ekle";
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategoryDto)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createCategoryDto);
+            StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7070/api/Categories", stringContent);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index","Category", new {area="Admin"});
+            }
+
+                return View();
         }
     }
 }
