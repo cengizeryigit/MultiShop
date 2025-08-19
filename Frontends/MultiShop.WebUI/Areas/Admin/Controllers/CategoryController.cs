@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             ViewBag.v0="Kategori İşlemleri";
