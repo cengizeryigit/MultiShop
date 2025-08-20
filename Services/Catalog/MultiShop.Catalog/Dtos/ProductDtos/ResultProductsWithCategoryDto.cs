@@ -1,4 +1,6 @@
-﻿namespace MultiShop.Catalog.Dtos.ProductDtos
+﻿using MultiShop.Catalog.Dtos.CategoryDtos;
+
+namespace MultiShop.Catalog.Dtos.ProductDtos
 {
     public class ResultProductsWithCategoryDto
     {
@@ -9,6 +11,6 @@
         public string ProductDescription { get; set; }
         public string CategoryID { get; set; }
 
-        public string CategoryName { get; set; }
+        public ResultCategoryDto Category { get; set; }
     }
 }
