@@ -21,10 +21,11 @@
                         <input type="text" class="form-control" asp-for="ProductImageUrl" />
                         <br />
                         <label>Ürün Kategorisi</label>
-                        <input type="text" class="form-control" asp-for="CategoryID" />
+                        @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>
+                                                )ViewBag.CategoryList,new { @class = "form-control" })
                         <br />
                         <label>Ürün Açıklaması</label>
-                        <textarea type="text" class="form-control" asp-for="ProductDescription" rows="5" ></textarea>
+                        <textarea type="text" class="form-control" asp-for="ProductDescription" rows="5"></textarea>
                         <br />
                         <button class="btn btn-primary">Ürün Ekle</button>
                     </form>

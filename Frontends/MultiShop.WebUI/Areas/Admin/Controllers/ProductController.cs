@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
 using Newtonsoft.Json;
 
@@ -44,6 +46,18 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.v1 = "Anasayfa";
             ViewBag.v2 = "Ürünler";
             ViewBag.v3 = "Ürün Ekle";
+
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7070/api/Categories");
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var categories = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
+            List<SelectListItem> categoryList = (from x in categories
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = x.CategoryName,
+                                                     Value = x.CategoryID
+                                                 }).ToList();
+            ViewBag.CategoryList = categoryList;
             return View();
         }
     }
