@@ -40,7 +40,7 @@ namespace MultiShop.Catalog.Controllers
             return Ok("Ürün başarıyla eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
             await _productService.DeleteProductAsync(id);
