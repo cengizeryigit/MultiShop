@@ -36,5 +36,15 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             }
             return View();
         }
+
+        [Route("CreateProduct")]
+        public async Task<IActionResult> CreateProduct()
+        {
+            ViewBag.v0 = "Ürün İşlemleri";
+            ViewBag.v1 = "Anasayfa";
+            ViewBag.v2 = "Ürünler";
+            ViewBag.v3 = "Ürün Ekle";
+            return View();
+        }
     }
 }
