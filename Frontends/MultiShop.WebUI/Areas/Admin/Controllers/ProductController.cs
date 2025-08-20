@@ -39,6 +39,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpGet]
         [Route("CreateProduct")]
         public async Task<IActionResult> CreateProduct()
         {
@@ -58,6 +59,23 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
                                                      Value = x.CategoryID
                                                  }).ToList();
             ViewBag.CategoryList = categoryList;
+            return View();
+        }
+
+        [HttpPost]
+        [Route("CreateProduct")]
+        public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createProductDto);
+            StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7070/api/Products", stringContent);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Product", new { area = "Admin" });
+            }
+
             return View();
         }
     }
